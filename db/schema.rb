@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_04_015949) do
+ActiveRecord::Schema.define(version: 2019_04_04_020408) do
 
   create_table "batches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "date", default: "2019-04-04 02:14:03"
   end
 
   create_table "budgets", force: :cascade do |t|
@@ -30,12 +31,14 @@ ActiveRecord::Schema.define(version: 2019_04_04_015949) do
     t.integer "budget_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", default: "", null: false
     t.index ["budget_id"], name: "index_categories_on_budget_id"
   end
 
   create_table "committees", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", default: "", null: false
   end
 
   create_table "committees_members", force: :cascade do |t|
@@ -48,6 +51,8 @@ ActiveRecord::Schema.define(version: 2019_04_04_015949) do
   create_table "fiscal_years", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", default: "", null: false
+    t.boolean "active", default: true
   end
 
   create_table "form_responses", force: :cascade do |t|
@@ -56,6 +61,8 @@ ActiveRecord::Schema.define(version: 2019_04_04_015949) do
     t.integer "batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "answers", default: "--- []\n"
+    t.string "id_number", default: "1939", null: false
     t.index ["batch_id"], name: "index_form_responses_on_batch_id"
     t.index ["form_id"], name: "index_form_responses_on_form_id"
     t.index ["member_id"], name: "index_form_responses_on_member_id"
@@ -71,17 +78,25 @@ ActiveRecord::Schema.define(version: 2019_04_04_015949) do
   create_table "forms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type", default: "ATC", null: false
+    t.text "questions", default: "--- []\n"
   end
 
   create_table "members", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", default: "", null: false
+    t.integer "auth_level", default: 0
   end
 
   create_table "subcategories", force: :cascade do |t|
     t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", default: "", null: false
+    t.integer "amount_allotted", default: 0
+    t.integer "amount_pending", default: 0
+    t.integer "amount_spent", default: 0
     t.index ["category_id"], name: "index_subcategories_on_category_id"
   end
 
