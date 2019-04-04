@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_211827) do
+ActiveRecord::Schema.define(version: 2019_04_04_015949) do
 
-  create_table "atc_forms", force: :cascade do |t|
-    t.integer "member_id"
+  create_table "batches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_atc_forms_on_member_id"
   end
 
   create_table "budgets", force: :cascade do |t|
     t.integer "fiscal_year_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "committee_id"
+    t.index ["committee_id"], name: "index_budgets_on_committee_id"
     t.index ["fiscal_year_id"], name: "index_budgets_on_fiscal_year_id"
   end
 
@@ -33,7 +33,42 @@ ActiveRecord::Schema.define(version: 2019_04_01_211827) do
     t.index ["budget_id"], name: "index_categories_on_budget_id"
   end
 
+  create_table "committees", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "committees_members", force: :cascade do |t|
+    t.integer "committee_id"
+    t.integer "member_id"
+    t.index ["committee_id"], name: "index_committees_members_on_committee_id"
+    t.index ["member_id"], name: "index_committees_members_on_member_id"
+  end
+
   create_table "fiscal_years", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "form_responses", force: :cascade do |t|
+    t.integer "member_id"
+    t.integer "form_id"
+    t.integer "batch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_form_responses_on_batch_id"
+    t.index ["form_id"], name: "index_form_responses_on_form_id"
+    t.index ["member_id"], name: "index_form_responses_on_member_id"
+  end
+
+  create_table "form_responses_subcategories", force: :cascade do |t|
+    t.integer "form_response_id"
+    t.integer "subcategory_id"
+    t.index ["form_response_id"], name: "index_form_responses_subcategories_on_form_response_id"
+    t.index ["subcategory_id"], name: "index_form_responses_subcategories_on_subcategory_id"
+  end
+
+  create_table "forms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
