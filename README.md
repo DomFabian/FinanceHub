@@ -1,24 +1,57 @@
-# README
+# FinanceHub
+A Ruby on Rails web application for the Student Engineers' Council.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## What is FinanceHub?
+FinanceHub is an app started by Dominick Fabian and continued by other members in the
+SEC Systems Administration committee. It has the goal of handling all of the financial
+data of the council and allowing members to securely upload information that will allow
+the CFO to handle dealings with SOFC. The old system is slowly falling apart and will 
+soon be decommissioned once the tax archives are not longer required. From then on out,
+FinanceHub will take over all financial dealings.
 
-Things you may want to cover:
+## Goals of this project
+Some of the goals of FinanceHub include:
+- Integration with MembershipHub for user authentication and access control
+- Easy maintenance and accessibility of information to authorized users
+- Document upload and storage for items such as receipts, signed forms, and other important records
+- Maintainability, in the form of up-to-date documentation and troubleshooting guides
 
-* Ruby version
+## Topics of interest
+This application requires `rails 5.2.3`.
+This application requires `ruby 2.5.1`.
 
-* System dependencies
+## How to get FinanceHub running
+First clone the repository:
+```
+git clone https://github.com/domfabian/financehub.git
+```
 
-* Configuration
+Then change into the directory of the application:
+```
+cd financehub
+```
 
-* Database creation
+Now we will make sure that all gems are installed on our local machine:
+```
+gem install bundler
+bundle update
+bundle install --without production
+```
 
-* Database initialization
+Make sure that your local database is up-to-date:
+```
+rails db:migrate
+```
 
-* How to run the test suite
+Now we are ready to start up the Rails server:
+```
+rails s -p $PORT -b $IP
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+If you make a mistake and need to reset things on your local machine:
+```
+rails db:reset
+rails db:seed
+```
 
-* Deployment instructions
-
-* ...
+Now you should be ready to go!
