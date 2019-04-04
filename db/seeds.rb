@@ -29,6 +29,8 @@ fr.member = m
 fr.batch = batch
 fr.form = form
 
+form.form_type = "ATC"
+
 s.save
 cat.save
 b.save
