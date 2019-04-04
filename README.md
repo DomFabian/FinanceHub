@@ -69,6 +69,7 @@ Now you should be ready to go!
   - `name` (`string`)
   - `auth_level` (`integer`)
   - `has_and_belongs_to_many Committees`
+  - `has_many FormResponses`
 
 - `Committee`
   - `name` (`string`)
@@ -89,4 +90,34 @@ Now you should be ready to go!
   - `belongs_to Budget`
 
 - `Subcategory`
-  - `allotted_amount` (`integer`)
+  - `name` (`string`)
+  - `amount_allotted` (`decimal`)
+  - `amount_pending` (`decimal`)
+  - `amount_spent` (`decimal`)
+  - `has_and_belongs_to_many FormResponses`
+  - `belongs_to Category`
+
+- `Form`
+  - `form_type` (`string`)
+  - `questions` (`Array` (serialized with YAML))
+  - `has_many FormResponses`
+  - Supports AWS S3 attached documents for:
+    - Approval to Charge (ATC) form
+    - Credit Card (CC) form
+    - Check Request Form (CRF) form
+
+- `FormResponse`
+  - `id_number` (`string`)
+  - `answers` (`Array` (serialized with YAML))
+  - `has_and_belongs_to_many Subcategories`
+  - `belongs_to Member`
+  - `belongs_to Form`
+  - `belongs_to Batch`
+  - Supports AWS S3 attached documents for:
+    - Arbitrary PDFs
+    - Receipts
+
+- `Batch`
+  - `date` (`datetime`)
+  - `has_many FormResponses`
+
