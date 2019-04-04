@@ -17,8 +17,8 @@ Some of the goals of FinanceHub include:
 - Maintainability, in the form of up-to-date documentation and troubleshooting guides
 
 ## Topics of interest
-This application requires `rails 5.2.3`.
-This application requires `ruby 2.5.1`.
+This application requires Rails `5.2.3`.
+This application requires Ruby `2.5.1`.
 
 ## How to get FinanceHub running
 First clone the repository:
@@ -29,6 +29,14 @@ git clone https://github.com/domfabian/financehub.git
 Then change into the directory of the application:
 ```
 cd financehub
+```
+
+Ensure that you are using the correct version of Ruby and Ruby:
+```
+rvm install 2.5.1
+rvm use 2.5.1
+rails --version
+ruby --version
 ```
 
 Now we will make sure that all gems are installed on our local machine:
@@ -55,3 +63,30 @@ rails db:seed
 ```
 
 Now you should be ready to go!
+
+## Models currently set up
+- `Member`
+  - `name` (`string`)
+  - `auth_level` (`integer`)
+  - `has_and_belongs_to_many Committees`
+
+- `Committee`
+  - `name` (`string`)
+  - `has_and_belongs_to_many Members`
+
+- `FiscalYear`
+  - `name` (`string`)
+  - `active` (`boolean`)
+  - `has_many Budgets`
+
+- `Budget`
+  - `belongs_to FiscalYear`
+  - `has_many Categories`
+  - `has_many Subcategories through Categories`
+
+- `Category`
+  - `has_many Subcategories`
+  - `belongs_to Budget`
+
+- `Subcategory`
+  - `allotted_amount` (`integer`)
