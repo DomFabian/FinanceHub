@@ -1,0 +1,16 @@
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+# use Heroku environment variables
+amazon:
+  service: S3
+  access_key_id: <%= ENV["ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["SECRET_ACCESS_KEY"] %>
+  region: us-east-1
+  bucket: finance-hub
+

@@ -3,9 +3,10 @@ class Form < ApplicationRecord
   
   has_many :form_responses
   
-  #has_one_attached :atc_form
-  #has_one_attached :cc_form
-  #has_one_attached :crf_form
+  # files stored in AWS S3 bucket
+  has_one_attached :atc_form
+  has_one_attached :cc_form
+  has_one_attached :crf_form
   
   FORM_TYPES = ["ATC", "CC", "CRF"]
   
