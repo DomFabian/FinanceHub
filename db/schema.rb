@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_04_032510) do
+ActiveRecord::Schema.define(version: 2019_04_09_031337) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -108,6 +108,15 @@ ActiveRecord::Schema.define(version: 2019_04_04_032510) do
     t.datetime "updated_at", null: false
     t.string "name", default: "", null: false
     t.integer "auth_level", default: 0
+    t.string "email", default: "", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "member_id"
+    t.string "description", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_notifications_on_member_id"
   end
 
   create_table "subcategories", force: :cascade do |t|
